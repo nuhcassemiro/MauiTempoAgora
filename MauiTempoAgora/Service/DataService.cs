@@ -25,8 +25,17 @@ namespace MauiTempoAgora.Service
                 {
                     string json = response.Content.ReadAsStringAsync().Result;
 
+                    Debug.WriteLine("----------------------------------");
+                    Debug.WriteLine(json);
+                    Debug.WriteLine("----------------------------------");
+
                     //var rascunho = JsonConvert.DeserializeObject(json);
                     var rascunho = JObject.Parse(json);
+
+                    Debug.WriteLine("----------------------------------");
+                    Debug.WriteLine(rascunho);
+                    Debug.WriteLine("----------------------------------");
+
 
                     DateTime time = new DateTime(1970, 1, 1, 0, 0, 0, 0);
                     DateTime sunrise = time.AddSeconds((double)rascunho["sys"]["sunrise"]).ToLocalTime();
@@ -49,7 +58,7 @@ namespace MauiTempoAgora.Service
                     };
                 }
             }
-
+            return tempo;
         }
     }
 }
