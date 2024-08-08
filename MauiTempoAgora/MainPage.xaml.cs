@@ -7,12 +7,12 @@ namespace MauiTempoAgora
 {
     public partial class MainPage : ContentPage
     {
-        CancellationTokenSource _cancellationTokenSource;
+        CancellationTokenSource _cancelTokenSource;
         bool _isCheckingLocation;
 
         string? cidade;
 
-       public MainPage()
+        public MainPage()
         {
             InitializeComponent();
         }
@@ -25,12 +25,12 @@ namespace MauiTempoAgora
 
                 GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
 
-                Location? Location = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
+                Location? location = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
 
-                if(Location != null)
+                if (location != null)
                 {
-                    lbl_latitude.Text = Location.Latitude.ToString();
-                    lbl_longitude.Text = Location.Longitude.ToString();
+                    lbl_latitude.Text = location.Latitude.ToString();
+                    lbl_longitude.Text = location.Longitude.ToString();
 
                     Debug.WriteLine("----------------------------------");
                     Debug.WriteLine(location);
@@ -41,15 +41,15 @@ namespace MauiTempoAgora
             {
                 await DisplayAlert("Erro: Dispositivo não Suporta", fnsEx.Message, "OK");
             }
-            catch(FeatureNotEnabledException fneEx)
+            catch (FeatureNotEnabledException fneEx)
             {
                 await DisplayAlert("Erro: Localização Desabilitada", fneEx.Message, "OK");
             }
-            catch(PermissionException pEx)
+            catch (PermissionException pEx)
             {
                 await DisplayAlert("Erro: Permissão", pEx.Message, "OK");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await DisplayAlert("Erro: ", ex.Message, "OK");
             }
@@ -83,7 +83,16 @@ namespace MauiTempoAgora
             }
             return "Nada";
         }
-        
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
